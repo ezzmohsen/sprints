@@ -7,15 +7,20 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-
+    // Display a listing of the products
     public function index()
     {
         $products = Product::all();
         return response()->json($products);
     }
 
+    // Show the form for creating a new product
+    public function create()
+    {
+        return view('products.create');
+    }
 
-
+    // Store a newly created product in storage
     public function store(Request $request)
     {
         $request->validate([
@@ -47,6 +52,7 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
+    // Update the specified product in storage
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -71,7 +77,7 @@ class ProductController extends Controller
         return response()->json(['message' => 'Product updated successfully', 'product' => $product]);
     }
 
-
+    // Remove the specified product from storage
     public function destroy($id)
     {
         $product = Product::find($id);
