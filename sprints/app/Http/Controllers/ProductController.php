@@ -90,4 +90,17 @@ class ProductController extends Controller
 
         return response()->json(['message' => 'Product deleted successfully']);
     }
+    public function edit($id)
+    {
+        $product = Product::find($id);
+
+        if (is_null($product)) {
+            return redirect()->route('products.index')->with('error', 'Product not found');
+        }
+
+        return view('products.edit', compact('product'));
+    }
+
+    // Update the specified product in storage
+
 }
